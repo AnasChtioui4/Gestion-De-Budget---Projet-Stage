@@ -175,6 +175,7 @@ function renderProjects() {
     const card = document.createElement("div");
     card.className = "projet";
     card.innerHTML = `
+      <button id="deleteProjet">X</button>
       <h2>${projet.nom}</h2>
       <p>Budget: <span class="budget-value">${projet.budget.toFixed(2)} dh</span></p>
       <p>Statut: <span class="statut-badge ${status}">${statusLabel}</span></p>
