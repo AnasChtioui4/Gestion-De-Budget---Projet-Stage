@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestion de budget | Page Principale</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Web Header -->
+    <header>
+      <img src="assets/images/Logo_AWB.png" alt="AWB Logo" />
+      <h1>Gestion De Budget</h1>
+      <h3>Projet de stage</h3>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <section class="info">
+        <h3>Total des projets: <span id="total_prj">0</span></h3>
+        <div class="search_filter">
+          <input type="text" name="" id="search" placeholder="Search" />
+          <button id="filter">Filter</button>
+          <div class="filter_op hidden">
+            <p id="filter_option" style="border-radius: 10px 9px 0 0">A -> Z</p>
+            <p id="filter_option">Z -> A</p>
+            <p id="filter_option">Budget</p>
+            <p id="filter_option" style="border-radius: 0 0 10px 9px">Statut</p>
+          </div>
+        </div>
+      </section>
+      <section class="projets">
+        <!-- <div class="projet">
+          <h2>Attijari Wafabank Club Sportif Bouskoura</h2>
+          <p>Budget: <span class="budget-value">10000dh</span></p>
+          <p>Statut: <span class="statut-badge ok">Bien!</span></p>
+        </div> -->
+        <button id="add_prj"><p>+</p></button>
+      </section>
+    </main>
+
+    <!-- Création du projet -->
+    <div id="overlay" class="overlay hidden">
+      <div class="form">
+        <div class="form-header">
+          <div>
+            <h2 id="title-preview">Nouveau Projet</h2>
+            <p>Definissez le budget et ajoutez les ressources necessaires</p>
+          </div>
+          <button class="close-btn" id="closeModalBtn">X</button>
+        </div>
+
+        <div class="form-body">
+          <div class="field">
+            <label for="projet-title">Nom du projet</label>
+            <input
+              id="projet-title"
+              type="text"
+              placeholder="Ex. Attijariwafa Ventures"
+              oninput="updateTitle()"
+            />
+          </div>
+
+          <div class="field">
+            <label for="budget">Budget</label>
+            <div class="budget-row">
+              <input
+                type="number"
+                id="budget"
+                min="0"
+                placeholder="0000.00"
+                oninput="updateBudget()"
+              />
+              <div class="currency">MAD</div>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="resource-header">
+              <h3>Resources</h3>
+              <button onclick="addResource()" id="addResourceBtn">+ Ajouter une resource</button>
+            </div>
+            <div class="resource-list" id="resourceList">
+              <div class="resource-row">
+                <input
+                  type="text"
+                  class="rname"
+                  placeholder="Nom de la ressource"
+                  oninput="recalculate()"
+                />
+                <input
+                  type="number"
+                  class="rprice"
+                  min="0"
+                  placeholder="Prix (MAD)"
+                  oninput="recalculate()"
+                />
+                <button class="remove-btn" onclick="removeRow(this)">✕</button>
+              </div>
+            </div>
+            <div class="empty-list hidden" id="emptyList">
+              Acune resource ajoutée pour l'instant
+            </div>
+          </div>
+
+          <div class="summary">
+            <div class="summary-row">
+              <span class="label">Total resources</span>
+              <span class="value" id="totalResource">0.00 MAD</span>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill" id="barFill"></div>
+            </div>
+
+            <div class="summary-row">
+              <span class="label">Reste</span>
+              <span class="value rest-value ok" id="restValue">0.00 MAD</span>
+            </div>
+            <div class="status-badge ok" id="statusBadge">Bien !</div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-cancel" id="cancelBtn">Annuler</button>
+          <button class="btn btn-primary" id="saveBtn">
+            Enregistrer le projet
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
