@@ -140,23 +140,29 @@ main {
         }
       }
 
-      #deleteProjet{
+      #deleteProjet {
+        z-index: 10;
         position: absolute;
-        top: 10px;
-        right: 10px;
+        padding: 4px;
+        top: 15px;
+        right: 15px;
         text-align: center;
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 25px;
-        height: 25px;
         outline: none;
-        border-radius: 5px;
-        border: 2px solid hsl(24, 99%, 78%);
-        background-color:  hsl(24, 99%, 88%);
+        border: none;
+        font-size: 12px;
+        transform: scaleX(1.3);
+        background: none;
         color: var(--orange);
         font-weight: 700;
         cursor: pointer;
+      }
+
+      #deleteProjet:hover{
+        background-color: var(--bg-orange);
+        border-radius: 50%;
       }
     }
 
@@ -635,5 +641,126 @@ input:focus {
   box-shadow: 0 6px 16px rgba(239, 62, 54, 0.3);
 }
 .btn-primary:hover {
+  opacity: 0.92;
+}
+
+/* Delete menu */
+.confirmOverlay {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inset: 0;
+  background: rgba(20, 20, 20, 0.45);
+  backdrop-filter: blur(5px);
+  z-index: 100;
+  padding: 20px;
+}
+
+.confirmForm {
+  position: relative;
+  background-color: var(--white);
+  width: 100%;
+  max-width: 500px;
+  border-radius: 20px;
+  border: 4px solid transparent;
+  background-image: linear-gradient(#fff, #fff), var(--gradient);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  animation: rise 0.22s ease-out;
+  overflow: hidden;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.delete-body {
+  padding: 32px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.warning-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(246, 70, 67, 0.12);
+  color: var(--red);
+  font-size: 28px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.delete-body h2 {
+  font-family: "Poppins", sans-serif;
+  color: var(--text-dark);
+  font-size: 19px;
+  margin-bottom: 10px;
+}
+
+.delete-body p {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.delete-body .project-name {
+  color: var(--red);
+  font-weight: 700;
+}
+
+.modal-footer {
+  padding: 18px 28px 26px;
+  display: flex;
+  gap: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  transition:
+    transform 0.12s,
+    opacity 0.12s;
+}
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-cancel {
+  background: var(--card-bg);
+  color: var(--text-muted);
+  border: 1.5px solid var(--border);
+}
+.btn-cancel:hover {
+  background: var(--border);
+}
+
+.btn-delete {
+  background: var(--gradient);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(246, 70, 67, 0.3);
+}
+.btn-delete:hover {
   opacity: 0.92;
 }

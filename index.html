@@ -72,7 +72,9 @@
           <div class="field">
             <div class="resource-header">
               <h3>Resources</h3>
-              <button onclick="addResource()" id="addResourceBtn">+ Ajouter une resource</button>
+              <button onclick="addResource()" id="addResourceBtn">
+                + Ajouter une resource
+              </button>
             </div>
             <div class="resource-list" id="resourceList">
               <div class="resource-row">
@@ -117,6 +119,29 @@
           <button class="btn btn-cancel" id="cancelBtn">Annuler</button>
           <button class="btn btn-primary" id="saveBtn">
             Enregistrer le projet
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirm Menu -->
+    <div id="confirmOverlay" class="confirmOverlay hidden">
+      <div class="confirmForm">
+        <div class="delete-body">
+          <div class="warning-icon">!</div>
+          <h2>Supprimer ce projet ?</h2>
+          <p>
+            Vous êtes sur le point de supprimer
+            <span class="project-name"
+              >" "</span
+            >. Cette action est irréversible et supprimera aussi toutes ses
+            ressources.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-cancel" id="cancelDeleteBtn">Annuler</button>
+          <button class="btn btn-delete" id="confirmDeleteBtn">
+            Supprimer
           </button>
         </div>
       </div>

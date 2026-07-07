@@ -21,6 +21,12 @@ const restValueDisplay = document.getElementById("restValue");
 const statusBadge = document.getElementById("statusBadge");
 const saveBtn = document.getElementById("saveBtn");
 
+// Delete Modal Variables
+const deleteProjetBtns = document.querySelectorAll("#deleteProjet");
+const titleDelDisplay = document.getElementsByClassName("project-name");
+const cancelDeleteBtn = document.getElementById("cancelDeleteBtn");
+const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+
 // ============ OPEN / CLOSE MODAL ============
 
 function closeModal() {
@@ -191,3 +197,10 @@ function renderProjects() {
 // ============ INIT ============
 
 totalProjetDisplay.textContent = projetsSection.querySelectorAll(".projet").length;
+
+// =========== Delete Project =========
+deleteProjetBtns.forEach((e) => {
+  e.addEventListener('click', () => {
+    console.log("Working!")
+  })
+})
