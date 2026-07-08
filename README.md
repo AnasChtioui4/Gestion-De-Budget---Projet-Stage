@@ -81,8 +81,8 @@ Aucun outil de build ni dépendance requis — il s'agit d'un site statique.
 - [x] Liste de ressources dynamique (ajout/suppression)
 - [x] Badges de statut (Bien! / Attention / Dépassé!)
 - [x] Modale de confirmation de suppression
-- [ ] Fonctionnalité de recherche
-- [ ] Menu de tri (A-Z, Budget, Statut)
+- [x] Fonctionnalité de recherche
+- [x] Menu de tri (A-Z, Z-A, Budget)
 - [ ] Modification des projets existants
 - [ ] Persistance des données (localStorage)
 - [ ] Migration vers React (frontend)
