@@ -1,7 +1,5 @@
 let projets = [];
 
-const filterBtn = document.getElementById("filter");
-const filterOption = document.querySelector(".filter_op");
 const addProjectBtn = document.getElementById("add_prj");
 const closeModalBtn = document.getElementById("closeModalBtn");
 const cancelProjet = document.getElementById("cancelBtn");
@@ -20,12 +18,6 @@ const barFill = document.getElementById("barFill");
 const restValueDisplay = document.getElementById("restValue");
 const statusBadge = document.getElementById("statusBadge");
 const saveBtn = document.getElementById("saveBtn");
-
-// Delete Modal Variables
-const deleteProjetBtns = document.querySelectorAll("#deleteProjet");
-const titleDelDisplay = document.getElementsByClassName("project-name");
-const cancelDeleteBtn = document.getElementById("cancelDeleteBtn");
-const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
 
 // ============ OPEN / CLOSE MODAL ============
 
@@ -52,10 +44,6 @@ function updateTitle() {
 }
 
 // ============ FILTER DROPDOWN ============
-
-filterBtn.addEventListener("click", () => {
-  filterOption.classList.toggle("hidden");
-});
 
 // ============ RESOURCE ROWS ============
 
@@ -103,7 +91,9 @@ function getStats(budgetValue, resources) {
 function recalculate() {
   const budgetValue = parseFloat(budget.value) || 0;
 
-  const resources = Array.from(resourceList.querySelectorAll(".resource-row")).map((row) => ({
+  const resources = Array.from(
+    resourceList.querySelectorAll(".resource-row"),
+  ).map((row) => ({
     prix: parseFloat(row.querySelector(".rprice").value) || 0,
   }));
 
@@ -156,7 +146,9 @@ saveBtn.addEventListener("click", () => {
   const nom = title.value.trim() || "Projet sans nom";
   const budgetValue = parseFloat(budget.value) || 0;
 
-  const resources = Array.from(resourceList.querySelectorAll(".resource-row")).map((row) => ({
+  const resources = Array.from(
+    resourceList.querySelectorAll(".resource-row"),
+  ).map((row) => ({
     nom: row.querySelector(".rname").value || "Ressource",
     prix: parseFloat(row.querySelector(".rprice").value) || 0,
   }));
@@ -170,37 +162,69 @@ saveBtn.addEventListener("click", () => {
 
 // ============ RENDER PROJECTS ON MAIN PAGE ============
 
-function renderProjects() {
-  // remove every existing .projet card, but keep the "+" button
+function renderProjects(list = projets) {
   projetsSection.querySelectorAll(".projet").forEach((card) => card.remove());
 
-  projets.forEach((projet) => {
+  list.forEach((projet) => {
     const { rest, status } = getStats(projet.budget, projet.resources);
-    const statusLabel = status === "over" ? "Depasse !" : status === "warn" ? "Attention" : "Bien !";
+    const statusLabel =
+      status === "over"
+        ? "Depasse !"
+        : status === "warn"
+          ? "Attention"
+          : "Bien !";
 
     const card = document.createElement("div");
     card.className = "projet";
     card.innerHTML = `
-      <button id="deleteProjet">X</button>
       <h2>${projet.nom}</h2>
-      <p>Budget: <span class="budget-value">${projet.budget.toFixed(2)} dh</span></p>
+      <p>Budget: <span class="budget-value">${projet.budget.toFixed(2)}dh</span></p>
       <p>Statut: <span class="statut-badge ${status}">${statusLabel}</span></p>
     `;
 
-    // insert before the "+" button so it always stays last
     projetsSection.insertBefore(card, addProjectBtn);
   });
 
-  totalProjetDisplay.textContent = projetsSection.querySelectorAll(".projet").length;
+  totalProjetDisplay.textContent =
+    projetsSection.querySelectorAll(".projet").length;
 }
 
-// ============ INIT ============
-
-totalProjetDisplay.textContent = projetsSection.querySelectorAll(".projet").length;
+// Delete Modal Variables
+const deleteProjetBtns = document.querySelectorAll("#deleteProjet");
+const titleDelDisplay = document.getElementsByClassName("project-name");
+const cancelDeleteBtn = document.getElementById("cancelDeleteBtn");
+const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
 
 // =========== Delete Project =========
-deleteProjetBtns.forEach((e) => {
-  e.addEventListener('click', () => {
-    console.log("Working!")
-  })
-})
+
+// =========== Filter Logic ===========
+const filterBtn = document.getElementById("filter");
+const filterOption = document.querySelector(".filter_op");
+const AZFilter = document.getElementById("AZ");
+const ZAFilter = document.getElementById("ZA");
+const budgetFilter = document.getElementById("budgetFilter");
+
+filterBtn.addEventListener("click", () => {
+  filterOption.classList.toggle("hidden");
+});
+
+filterOption.querySelectorAll(".filter_option").forEach((option) => {
+  option.addEventListener("click", (e) => {
+    if (e.target === AZFilter)
+      projets.sort((a, b) => a.nom.localeCompare(b.nom));
+    else if (e.target === ZAFilter)
+      projets.sort((a, b) => a.nom.localeCompare(b.nom)).reverse();
+    else projets.sort((a, b) => a.budget - b.budget);
+    renderProjects();
+    filterOption.classList.add("hidden");
+  });
+});
+
+// Search Logic
+const searchBar = document.getElementById("search");
+
+searchBar.addEventListener("input", () => {
+  const query = searchBar.value.toLowerCase();
+  const searchProjet = projets.filter((projet) => projet.nom.toLowerCase().includes(query),);
+  renderProjects(searchProjet);
+});

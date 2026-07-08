@@ -1,4 +1,4 @@
-@import url("C:\Users\HP\Desktop\Projet Stage\Code\assets\fonts\Inter-VariableFont_opsz,wght.ttf");
+ @import url("C:\Users\HP\Desktop\Projet Stage\Code\assets\fonts\Inter-VariableFont_opsz,wght.ttf");
 @import url("C:\Users\HP\Desktop\Projet Stage\Code\assets\fonts\Poppins-Black.ttf");
 
 :root {
@@ -281,12 +281,12 @@ main {
   display: none !important  ;
 }
 
-#filter_option {
+.filter_option {
   transition: 0.2s ease-out;
   cursor: pointer;
 }
 
-#filter_option:hover {
+.filter_option:hover {
   background-color: var(--red);
   color: var(--white);
 }
